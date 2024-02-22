@@ -16,13 +16,15 @@ namespace TestWebApi.Models
         {
         }
 
-        public virtual DbSet<ReserveInfo> ReserveInfo { get; set; } = null!;
+        public virtual DbSet<ReserveInfo> ReserveInfo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ReserveInfo>(entity =>
             {
-                entity.Property(e => e.ID).HasComment("預約號碼");
+                entity.Property(e => e.ID)
+                    .ValueGeneratedNever()
+                    .HasComment("識別號碼");
 
                 entity.Property(e => e.CreateTime)
                     .HasColumnType("datetime")
@@ -34,15 +36,27 @@ namespace TestWebApi.Models
                     .HasColumnType("date")
                     .HasComment("預約日期");
 
+                entity.Property(e => e.ReserveID)
+                    .HasMaxLength(14)
+                    .IsUnicode(false)
+                    .IsFixedLength()
+                    .HasComment("預約號碼");
+
                 entity.Property(e => e.ReserveUserName)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .HasComment("預約人員姓名");
 
                 entity.Property(e => e.ReserveUserPhone)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsUnicode(false)
                     .IsFixedLength()
                     .HasComment("預約人員電話");
+
+                entity.Property(e => e.SID)
+                    .ValueGeneratedOnAdd()
+                    .HasComment("流水號");
 
                 entity.Property(e => e.UpdateTime)
                     .HasColumnType("datetime")

@@ -6,17 +6,25 @@ namespace TestWebApi.Models
     public partial class ReserveInfo
     {
         /// <summary>
+        /// 識別號碼
+        /// </summary>
+        public Guid ID { get; set; }
+        /// <summary>
+        /// 流水號
+        /// </summary>
+        public int SID { get; set; }
+        /// <summary>
         /// 預約號碼
         /// </summary>
-        public int ID { get; set; }
+        public string ReserveID { get; set; }
         /// <summary>
         /// 預約人員姓名
         /// </summary>
-        public string ReserveUserName { get; set; } = null!;
+        public string ReserveUserName { get; set; }
         /// <summary>
         /// 預約人員電話
         /// </summary>
-        public string ReserveUserPhone { get; set; } = null!;
+        public string ReserveUserPhone { get; set; }
         /// <summary>
         /// 預約人數
         /// </summary>
